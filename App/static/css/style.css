@@ -1,0 +1,114 @@
+ body {
+    font-family: 'Inter', sans-serif;
+    background-color: #EBF0FA;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* [CHỈNH SỬA] Navbar giờ có màu nền giống footer (#F8F9FA) */
+.navbar {
+    background-color: #F8F9FA !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    /* Thêm đường viền mỏng ngăn cách cho đẹp */
+}
+
+.nav-link {
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #0d6efd;
+}
+
+.hero-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-title {
+    color: #343a40;
+    font-weight: 700;
+    line-height: 1.4;
+    max-width: 800px;
+    margin-bottom: 3rem;
+}
+
+/* Hiệu ứng: Khi hover nền sẽ chuyển sang màu xám nhạt, giữ nguyên chữ xanh */
+.btn-custom-hover-DangKy {
+    background-color: #fff;
+    /* Màu gốc là trắng */
+    transition: all 0.2s;
+    /* Hiệu ứng chuyển màu mượt mà */
+}
+
+.btn-custom-hover-DangKy:hover {
+    background-color: #edf0f3 !important;
+    /* Màu xám nhẹ khi hover */
+    color: #0d6efd !important;
+    /* Giữ nguyên chữ màu xanh */
+    border-color: #0d6efd !important;
+    /* Giữ nguyên viền màu xanh */
+}
+
+
+.hero-btn {
+    width: 200px;
+    padding: 10px 0;
+    font-weight: 500;
+}
+
+.footer {
+    background-color: #F8F9FA;
+    /* Màu này trùng với Navbar */
+    border-top: 1px solid #dee2e6;
+    padding: 1.5rem 0;
+}
+
+.logo-icon {
+    color: #adb5bd;
+    font-size: 2rem;
+}
+/* --- Thêm mới: Style cho tiêu đề có đường kẻ --- */
+.divider-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.divider-heading h2 {
+    font-weight: 700;
+    font-size: 2.5rem; /* Chữ to đậm */
+    color: #495057;    /* Màu xám đậm giống trong ảnh */
+    margin: 0 15px;    /* Khoảng cách giữa chữ và đường kẻ */
+    white-space: nowrap;
+}
+
+.divider-heading::before,
+.divider-heading::after {
+    content: "";
+    height: 6px;       /* Độ dày của đường kẻ */
+    width: 150px;      /* Độ dài của đường kẻ */
+    background-color: #495057; /* Màu đường kẻ trùng màu chữ */
+    border-radius: 4px;
+    display: block;
+}
+
+/* Chỉnh lại font chữ thông tin footer cho gọn */
+.footer-info {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #343a40; /* Màu chữ đậm hơn chút cho dễ đọc */
+    font-weight: 600;
+}
