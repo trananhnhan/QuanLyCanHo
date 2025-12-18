@@ -2,6 +2,12 @@
 {%extends 'layout/base.html'%}
 
 {%block content%}
+{%if taikhoan_co_thue%}
+hello
+{%endif%}
+
+{%if current_user.is_authenticated%}
+{%endif%}
 
 
 <section class="hero-section container">
@@ -11,13 +17,14 @@
 
     <h1 class="display-4 hero-title mt-2">
         Hệ Thống Căn Hộ Tiện Lợi<br>
-        Được Đánh Giá Cao Đạt<br>
-        Tiêu Chuẩn Quốc Tế
+        Được Đánh Giá Cao<br>
+        Đạt Tiêu Chuẩn Quốc Tế
     </h1>
 
     <div class="d-flex flex-column gap-3">
-        <button class="btn btn-primary hero-btn">Sign in</button>
-        <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Sign up</button>
+        <a href="/dangnhap"><button class="btn btn-primary hero-btn">Đăng nhập</button></a>
+
+        <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Đăng ký</button>
     </div>
 </section>
 {%endblock%}

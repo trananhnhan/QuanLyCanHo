@@ -112,3 +112,151 @@
     color: #343a40; /* Màu chữ đậm hơn chút cho dễ đọc */
     font-weight: 600;
 }
+
+/* mới, phòng*/
+/* Label chữ "Lọc theo tiêu chí" */
+.filter-label {
+    font-weight: bold;
+    color: #adb5bd; /* Màu xám nhạt giống hình */
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Style cho Card Phòng */
+.room-card {
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Phần ảnh placeholder (hình núi) */
+.card-img-placeholder {
+    height: 160px;
+    background-color: #f1f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 3.5rem;
+}
+
+/* Tên phòng */
+.room-title {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+/* Nút bấm trong card */
+.btn-view {
+    background-color: #1a73e8; /* Xanh dương đậm */
+    color: white;
+    border: none;
+}
+.btn-view:hover {
+    background-color: #1557b0;
+    color: white;
+}
+
+.btn-rent {
+    background-color: #e9ecef; /* Xám nhạt */
+    color: #495057;
+    border: none;
+}
+.btn-rent:hover {
+    background-color: #dee2e6;
+}
+
+/* Phân trang */
+.pagination .page-item.active .page-link {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+}
+.pagination .page-link {
+    color: #495057;
+    border: none;
+    margin: 0 3px;
+    border-radius: 4px;
+}
+
+/* Class tiện ích để ẩn hiện input */
+.hidden {
+    display: none !important;
+}
+
+/* Đảm bảo input không bị quá nhỏ */
+.filter-input {
+    min-width: 200px;
+}
+.form-control-sm {
+    border-color: #dee2e6;
+}
+.form-control-sm:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+/* mới, đăng nhap */
+/* Style cho khung Đăng nhập */
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 450px; /* Độ rộng khung login */
+    border-radius: 25px; /* Bo góc tròn nhiều như ảnh */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Đổ bóng mờ nhẹ */
+}
+
+/* Tùy chỉnh các ô Input */
+.login-card .form-control {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.login-card .form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+/* Icon mắt trong ô mật khẩu */
+.input-group-text {
+    cursor: pointer;
+    border-radius: 0 8px 8px 0 !important;
+}
+
+.login-card .form-control.border-end-0 {
+    border-radius: 8px 0 0 8px !important;
+}
+
+/* Màu chữ nhãn (Label) */
+.form-label {
+    color: #343a40;
+}
+/* header sau khi đăng nhập */
+/* Khung chứa tên và ảnh đại diện */
+.user-profile-badge {
+    background-color: rgba(206, 212, 218, 0.3); /* Màu xám nhạt trong suốt */
+    padding: 5px 15px;
+    border-radius: 50px; /* Bo tròn dạng thuốc nhộng */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Hiệu ứng cho ảnh đại diện hình tròn */
+.rounded-circle {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Đảm bảo nút đăng xuất đồng bộ màu sắc */
+.btn-outline-primary {
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+

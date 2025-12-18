@@ -33,6 +33,9 @@ class TaiKhoan(Base, UserMixin):
     avatar = Column(String(150),default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
     role = Column(Enum(UserRole), default= UserRole.USER, nullable= false)
 
+    def __str__(self):
+        return str(self.username)
+
 class NguoiThue(Base):
     ho = Column(String(50), nullable=False)
     ten = Column(String(100), nullable=False)
@@ -43,9 +46,14 @@ class NguoiThue(Base):
     id_taikhoan = Column(Integer,ForeignKey(TaiKhoan.id))
     taikhoan = relationship('TaiKhoan', backref="NguoiThue", lazy=True)
 
+    def __str__(self):
+        return str(self.ho + self.ten)
+
 class LoaiPhi(Base):
     ten = Column(String(50), nullable=False)
     mota = Column(String(150))
+    def __str__(self):
+        return str(self.ten)
 
 class ChiTietPhi(Base):
     sotienthu = Column(Integer, nullable=False)
@@ -61,6 +69,10 @@ class CanHo(Base):
     phongngu = Column(Integer, nullable=False)
     tinhtrang = Column(Enum(TinhTrang), default=TinhTrang.COTHETHUE)
     songuoitoida = Column(Integer, default=1)
+    img = Column(String(150),default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
+
+    def __str__(self):
+        return str(self.ten)
 
 class DichVu(Base):
     chitietphi = relationship('ChiTietPhi', backref="DichVu", lazy=True)
@@ -105,7 +117,7 @@ class YeuCau(Base):
 
 def create_fake_data():
 
-    pwhash = hashlib.md5("123456".encode('utf-8')).hexdigest()
+    pwhash = hashlib.md5("123".encode('utf-8')).hexdigest()
 
     admin_acc = TaiKhoan(username="admin", password=pwhash, role=UserRole.ADMIN)
     user_acc1 = TaiKhoan(username="nguyenvana", password=pwhash, role=UserRole.USER)
@@ -154,10 +166,14 @@ def create_fake_data():
     ch1 = CanHo(ten="P101", dientich=40, phongngu=1, tinhtrang=TinhTrang.DADAY, songuoitoida=2)
     ch2 = CanHo(ten="P102", dientich=25, phongngu=1, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=1)
     ch3 = CanHo(ten="P201", dientich=50, phongngu=2, tinhtrang=TinhTrang.BAOTRI, songuoitoida=4)
-    ch4 = CanHo(ten="P202", dientich=50, phongngu=2, tinhtrang=TinhTrang.BAOTRI, songuoitoida=4)
-    ch5 = CanHo(ten="P203", dientich=50, phongngu=2, tinhtrang=TinhTrang.BAOTRI, songuoitoida=4)
+    ch4 = CanHo(ten="P202", dientich=50, phongngu=3, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=5)
+    ch5 = CanHo(ten="P203", dientich=50, phongngu=3, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=5)
+    ch6 = CanHo(ten="P301", dientich=50, phongngu=2, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=5)
+    ch7 = CanHo(ten="P302", dientich=50, phongngu=4, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=7)
+    ch8 = CanHo(ten="P303", dientich=50, phongngu=5, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=15)
+    ch9 = CanHo(ten="SVIP", dientich=500, phongngu=8, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=8)
 
-    db.session.add_all([ch1, ch2, ch3, ch4, ch5])
+    db.session.add_all([ch1, ch2, ch3, ch4, ch5,ch6,ch7,ch8,ch9])
     db.session.commit()
 
     # 5. Gán Dịch Vụ cho Căn Hộ (Cấu hình phí cho từng phòng)
