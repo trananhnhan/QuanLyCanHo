@@ -69,6 +69,7 @@ class CanHo(Base):
     phongngu = Column(Integer, nullable=False)
     tinhtrang = Column(Enum(TinhTrang), default=TinhTrang.COTHETHUE)
     songuoitoida = Column(Integer, default=1)
+    mota = Column(String(150),default="Căn hộ này rất đẹp")
     img = Column(String(150),default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
 
     def __str__(self):
@@ -142,7 +143,14 @@ def create_fake_data():
         sodienthoai="0909888999",
         id_taikhoan=user_acc2.id
     )
-    db.session.add_all([nt1, nt2])
+    nt3 = NguoiThue(
+        ho="Trần Anh", ten="Nhân",
+        ngaysinh=datetime(1998, 8, 15),
+        congviec="Kế toán",
+        sodienthoai="0909888999",
+        id_taikhoan=user_acc3.id
+    )
+    db.session.add_all([nt1, nt2,nt3])
 
     # 3. Tạo Loại Phí & Chi Tiết Phí
     lp_phong = LoaiPhi(ten="Tiền Phòng", mota="Phí thuê căn hộ hàng tháng")
@@ -197,7 +205,21 @@ def create_fake_data():
         id_canho=ch1.id,
         id_nguoithue=nt1.id
     )
-    db.session.add(hd1)
+    hd2 = HopDong(
+        ngaybatdau=datetime(2024, 1, 1),
+        ngayketthuc=datetime(2025, 1, 1),
+        tiencoc=5000000,
+        id_canho=ch1.id,
+        id_nguoithue=nt2.id
+    )
+    hd3 = HopDong(
+        ngaybatdau=datetime(2024, 1, 1),
+        ngayketthuc=datetime(2025, 1, 1),
+        tiencoc=5000000,
+        id_canho=ch1.id,
+        id_nguoithue=nt3.id
+    )
+    db.session.add_all([hd1,hd2,hd3])
     db.session.commit()
 
     # 7. Tạo Hóa Đơn (Tháng 2/2024 cho Hợp đồng 1)

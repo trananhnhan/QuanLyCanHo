@@ -88,9 +88,13 @@ def register():
 
     return render_template("dangky.html", err_msg=err_msg)
 
-@app.route("/chitietphong")
-def chitietphong():
-    return render_template("chitietphong.html")
+@app.route("/chitietphong/<int:id>")
+def chitietphong(id):
+    phong = dao.get_phong_by_id(id)
+    so_nguoi_thue = dao.count_nguoi_dang_thue_phong(id)
+    dichvu = dao.get_dich_vu_tu_phong(id)
+    print(so_nguoi_thue,phong)
+    return render_template("chitietphong.html",phong = phong,so_nguoi_thue = so_nguoi_thue,dichvu = dichvu)
 
 if __name__ == "__main__":
     app.run(debug=True)

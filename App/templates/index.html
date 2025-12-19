@@ -1,4 +1,3 @@
-
 {%extends 'layout/base.html'%}
 
 {%block content%}
@@ -18,7 +17,9 @@ hello {{taikhoan_co_thue.congviec}}
     </h1>
 
     <div class="d-flex flex-column gap-3">
-        <a href="/phong"><button class="btn btn-primary hero-btn">Xem phòng</button></a>
+        <a href="/phong">
+            <button class="btn btn-primary hero-btn">Xem phòng</button>
+        </a>
         <a href="/lienhe">
             <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Liên hệ</button>
         </a>
@@ -38,13 +39,14 @@ hello {{taikhoan_co_thue.congviec}}
     </h1>
 
     <div class="d-flex flex-column gap-3">
-        <a href="/dangnhap"><button class="btn btn-primary hero-btn">Đăng nhập</button></a>
+        <a href="/dangnhap">
+            <button class="btn btn-primary hero-btn">Đăng nhập</button>
+        </a>
 
         <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Đăng ký</button>
     </div>
 </section>
 {%endif%}
-
 
 
 {%endblock%}

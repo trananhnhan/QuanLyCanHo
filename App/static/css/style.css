@@ -331,41 +331,57 @@
 }
 
 /* Chi tiet phong*/
-/* Khối Tiêu đề (Header) màu đậm hơn */
+/* --- [MỚI] Khung thẻ trắng bọc ngoài cùng --- */
+.main-content-card {
+    background-color: #ffffff;
+    border-radius: 25px; /* Bo góc lớn cho khung trắng */
+    overflow: hidden;    /* Để nội dung bên trong không tràn ra ngoài góc bo */
+    border: 1px solid #dee2e6; /* Viền mỏng nhẹ */
+}
+
+/* Đường kẻ dọc ngăn cách (Chỉ hiện trên màn hình lớn) */
+@media (min-width: 992px) {
+    .border-end-custom {
+        border-right: 4px solid #dbe0f0; /* Đường kẻ dày màu tím nhạt */
+    }
+}
+
+/* --- Style chung cho các khối nội dung bên trong --- */
+/* Màu tím nhạt giống ảnh image_667642.png */
 .info-box-header {
-    background-color: #d0d2e8; /* Màu tím nhạt đậm */
+    background-color: #dbe0f0;
     border-radius: 15px;
-    color: #2c3e50;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: #1e293b;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-/* Khối Nội dung (Content) màu nhạt hơn & có viền */
 .info-box-content {
-    background-color: #d0d2e8;
+    background-color: #dbe0f0;
     border-radius: 15px;
-    color: #2c3e50;
-    height: 500px; /* Chiều cao cố định */
-    border: 5px solid #e2e4f3;
-    /* Xóa các dòng align-items: center cũ đi nếu có */
+    color: #1e293b;
+    height: 500px;
+    /* Bỏ viền cũ đi để giống style phẳng của ảnh */
+    border: none;
 }
-/* --- Khối Ảnh --- */
+
+/* Khối Ảnh */
 .room-image-placeholder {
-    background-color: #6c82b5; /* Màu xanh đậm của khối ảnh */
-    border-radius: 10px;
-    height: 220px; /* Chiều cao cố định cho ảnh */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #64748b; /* Màu xám xanh đậm hơn cho khung ảnh */
+    border-radius: 12px;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+    /* Thêm viền trắng mỏng quanh ảnh nếu muốn giống card tách biệt */
+    border: 4px solid rgba(255,255,255,0.2);
 }
 
-/* --- Vùng Cuộn (Scroll) --- */
+/* Vùng Cuộn (Scroll) */
 .scrollable-text {
-    overflow-y: auto; /* Chỉ hiện thanh cuộn khi cần */
-    padding-right: 5px; /* Tránh chữ dính vào thanh cuộn */
-    /* Tùy chỉnh thanh cuộn cho đẹp */
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-/* Custom Scrollbar (Webkit) */
+/* Custom Scrollbar */
 .scrollable-text::-webkit-scrollbar {
     width: 6px;
 }
@@ -374,9 +390,6 @@
     border-radius: 10px;
 }
 .scrollable-text::-webkit-scrollbar-thumb {
-    background: #aab0c7;
+    background: #94a3b8;
     border-radius: 10px;
-}
-.scrollable-text::-webkit-scrollbar-thumb:hover {
-    background: #8e94ab;
 }

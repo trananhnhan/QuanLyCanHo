@@ -80,8 +80,17 @@ def tao_taikhoan(username = None, password = None, avatar = None):
     db.session.commit()
     return taikhoan
 
+def get_phong_by_id(id):
+    return CanHo.query.filter(CanHo.id == id).first()
 
+def count_nguoi_dang_thue_phong(id):
+    return HopDong.query.filter(HopDong.id_canho == id).count()
+def get_dich_vu_tu_phong(id):
+
+    return DichVu.query.filter(DichVu.id_canho == id).all()
 
 if __name__ == '__main__':
     with app.app_context():
-        print(tao_taikhoan(username="user3",password="123",avatar="https://res.cloudinary.com/dddesdoxw/image/upload/v1766064625/main-sample.png"))
+        print(get_dich_vu_tu_phong(1))
+        for i in get_dich_vu_tu_phong(1):
+            print(i.chitietphi.loaiphi.ten)
