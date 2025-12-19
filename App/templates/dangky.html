@@ -1,0 +1,42 @@
+{%extends 'layout/base.html'%}
+{%block title%}Đăng ký{%endblock%}
+{%block content%}
+
+{% if err_msg%}
+<div class="alert alert-danger">{{err_msg}}</div>
+{% endif %}
+
+<main class="flex-grow-1 d-flex align-items-center justify-content-center">
+    <div class="login-card p-5">
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="username" class="form-label fw-semibold">Tên Đăng Nhập</label>
+                <input type="text" class="form-control py-2" id="username" placeholder="Tên đăng nhập" name="username" required pattern="[A-Za-z0-9]*">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label fw-semibold">Mật Khẩu</label>
+                <input type="password" class="form-control py-2" id="password" placeholder="Mật khẩu" name="password" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label fw-semibold">Mật Khẩu</label>
+                <input type="password" class="form-control py-2" id="confirm-password" placeholder="Nhập Lại Mật khẩu" name="confirm-password" required>
+            </div>
+
+
+            <div class="mb-4">
+                <label for="username" class="form-label fw-semibold">Hình Đại Diện</label>
+                <input type="file" class="form-control py-2" id="avatar" placeholder="Ảnh Đại Diện" name="avatar">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mb-4 shadow-sm">Đăng Ký</button>
+
+            <div class="text-center">
+                <span class="text-secondary">Đã có tài khoản?</span>
+                <a href="/dangnhap" class="text-decoration-none fw-bold ms-1 text-primary">Đăng Nhập</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+{%endblock%}

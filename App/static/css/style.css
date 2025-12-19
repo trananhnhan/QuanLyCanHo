@@ -260,3 +260,123 @@
     transition: all 0.2s;
 }
 
+/* lienhe */
+/* Container chính của Card Liên Hệ */
+.contact-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 60px; /* Bo góc cực đại theo ảnh mới */
+    padding: 30px;
+    border: 1px solid #eef2f6;
+}
+
+/* Khung chứa ảnh QR (Bo góc mềm bên trong) */
+.qr-container {
+    background-color: #f1f5f9; /* Màu nền xanh xám nhạt */
+    height: 380px;
+    border-radius: 45px; /* Bo góc nhỏ hơn card ngoài một chút */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.qr-code {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+}
+
+.qr-placeholder-icon {
+    font-size: 8rem;
+    color: #cbd5e1;
+}
+
+/* Tên hiển thị */
+.contact-name {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+/* Nút Liên Hệ Ngay */
+.contact-btn-main {
+    padding: 12px 35px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: #1a73e8;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Nút Xem Phòng */
+.btn-contact-secondary {
+    padding: 12px 35px;
+    border-radius: 12px;
+    background-color: #f1f5f9;
+    color: #64748b;
+    border: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-contact-secondary:hover {
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+/* Chi tiet phong*/
+/* Khối Tiêu đề (Header) màu đậm hơn */
+.info-box-header {
+    background-color: #d0d2e8; /* Màu tím nhạt đậm */
+    border-radius: 15px;
+    color: #2c3e50;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Khối Nội dung (Content) màu nhạt hơn & có viền */
+.info-box-content {
+    background-color: #d0d2e8;
+    border-radius: 15px;
+    color: #2c3e50;
+    height: 500px; /* Chiều cao cố định */
+    border: 5px solid #e2e4f3;
+    /* Xóa các dòng align-items: center cũ đi nếu có */
+}
+/* --- Khối Ảnh --- */
+.room-image-placeholder {
+    background-color: #6c82b5; /* Màu xanh đậm của khối ảnh */
+    border-radius: 10px;
+    height: 220px; /* Chiều cao cố định cho ảnh */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Vùng Cuộn (Scroll) --- */
+.scrollable-text {
+    overflow-y: auto; /* Chỉ hiện thanh cuộn khi cần */
+    padding-right: 5px; /* Tránh chữ dính vào thanh cuộn */
+    /* Tùy chỉnh thanh cuộn cho đẹp */
+}
+
+/* Custom Scrollbar (Webkit) */
+.scrollable-text::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollable-text::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+.scrollable-text::-webkit-scrollbar-thumb {
+    background: #aab0c7;
+    border-radius: 10px;
+}
+.scrollable-text::-webkit-scrollbar-thumb:hover {
+    background: #8e94ab;
+}

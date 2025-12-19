@@ -1,0 +1,26 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<main class="flex-grow-1 d-flex align-items-center justify-content-center py-5">
+    <div class="contact-card shadow-sm">
+        <div class="qr-container">
+            <img src=" https://res.cloudinary.com/dddesdoxw/image/upload/v1766117950/QRZALO_sxqydb.jpg " alt="Zalo QR" class="qr-code">
+            <i class="bi bi-qr-code qr-placeholder-icon hidden"></i>
+        </div>
+
+        <div class="contact-info text-center">
+            <h1 class="contact-name divider-heading">Trần Nhân</h1>
+
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <a href="https://zalo.me/0338108255" target="_blank" class="btn btn-primary contact-btn-main shadow-sm">
+                    Liên Hệ Ngay
+                </a>
+
+                <a href="/phong" class="btn btn-contact-secondary">
+                    Xem phòng
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

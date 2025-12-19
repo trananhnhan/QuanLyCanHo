@@ -1,9 +1,11 @@
 import math
 
+import cloudinary
+import cloudinary.uploader
 from flask import Flask, render_template, request, redirect
 from flask_login import login_user, logout_user
 
-from App import app, login, dao
+from App import app, login, dao, db
 from App.dao import taikhoan_co_thue
 from App.decorators import anonymous_required
 
@@ -28,6 +30,10 @@ def phong():
         print(r.ten)
     return render_template('phong.html',rooms = rooms,pages=pages)
 
+@app.route('/lienhe')
+def lienhe():
+    return render_template("lienhe.html")
+
 @app.route("/dangnhap", methods=["get", "post"])
 @anonymous_required
 def dangnhap():
@@ -50,6 +56,41 @@ def dangnhap():
 def dangxuat():
     logout_user()
     return redirect("/")
+
+
+@app.route("/dangky", methods=['get', 'post'])
+def register():
+    err_msg = None
+    if request.method.__eq__("POST"):
+        password = request.form.get("password")
+        confirm = request.form.get("confirm-password")
+
+        if password.__eq__(confirm):
+            username = request.form.get("username")
+            avatar = request.files.get('avatar')
+            print(avatar)
+            file_path = None
+
+            if avatar:
+                res = cloudinary.uploader.upload(avatar)
+                print(res)
+                file_path = res['secure_url']
+                print(file_path)
+
+            try:
+                dao.tao_taikhoan(username= username,password=password,avatar=file_path)
+                return redirect('/dangnhap')
+            except:
+                db.session.rollback()
+                err_msg = "Hệ thống đang bị lỗi! Vui lòng quay lại sau!"
+        else:
+            err_msg = "Mật khẩu không khớp!"
+
+    return render_template("dangky.html", err_msg=err_msg)
+
+@app.route("/chitietphong")
+def chitietphong():
+    return render_template("chitietphong.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -3,13 +3,29 @@
 
 {%block content%}
 {%if taikhoan_co_thue%}
-hello
-{%endif%}
 
-{%if current_user.is_authenticated%}
-{%endif%}
+hello {{taikhoan_co_thue.congviec}}
+{%elif current_user.is_authenticated%}
+<section class="hero-section container">
+    <div class="divider-heading">
+        <h2>Căn Hộ Hoàng Kim</h2>
+    </div>
 
+    <h1 class="display-10 hero-title mt-2" style="color: #727C85;">
+        chúng tôi nhận thấy bạn chưa thuê nhà,<br>
+        xem phòng ưng ý và liên hệ để thuê ngay!<br>
 
+    </h1>
+
+    <div class="d-flex flex-column gap-3">
+        <a href="/phong"><button class="btn btn-primary hero-btn">Xem phòng</button></a>
+        <a href="/lienhe">
+            <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Liên hệ</button>
+        </a>
+
+    </div>
+</section>
+{%else%}
 <section class="hero-section container">
     <div class="divider-heading">
         <h2>Căn Hộ Hoàng Kim</h2>
@@ -27,6 +43,10 @@ hello
         <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Đăng ký</button>
     </div>
 </section>
+{%endif%}
+
+
+
 {%endblock%}
 
 

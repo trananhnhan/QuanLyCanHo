@@ -1,0 +1,69 @@
+{%extends 'layout/base.html'%}
+{%block title%}Đăng ký{%endblock%}
+
+{% block content %}
+<main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
+    <div class="container" style="max-width: 1200px;">
+        <div class="row g-4 h-100">
+
+            <div class="col-lg-5 d-flex flex-column gap-3">
+                <div class="info-box-header text-center py-3">
+                    <h2 class="m-0 fw-bold">Phòng P101</h2>
+                </div>
+
+                <div class="info-box-content flex-grow-1 d-flex flex-column p-3">
+                    <div class="room-image-placeholder w-100 mb-3 flex-shrink-0">
+                        <i class="bi bi-image fs-1 text-white opacity-50"></i>
+                    </div>
+
+                    <div class="scrollable-text flex-grow-1">
+                        <h5 class="fw-bold mb-2 text-center">Mô tả</h5>
+
+                        <p class="mb-0 px-2 text-start">
+                            Phòng này được xây từ năm 2025, với cửa khóa điện tử công nghệ cao,
+                            nằm ở tầng 1 để cho việc sinh hoạt dễ dàng hơn. <br><br>
+                            (Nội dung canh trái giúp mắt dễ đọc hơn khi đoạn văn dài...) <br>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 d-flex flex-column gap-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="info-box-header text-center py-3 h-100 d-flex align-items-center justify-content-center">
+                            <h5 class="m-0 fw-bold">Diện Tích: 100m2</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box-header text-center py-3 h-100 d-flex align-items-center justify-content-center">
+                            <h5 class="m-0 fw-bold">Người ở hiện tại: 2/7</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box-content flex-grow-1 p-4 d-flex flex-column">
+                    <h3 class="text-center fw-bold mb-4">Dịch Vụ</h3>
+
+                    <div class="scrollable-text flex-grow-1">
+                        <ul class="list-unstyled fs-5 text-start ps-3">
+                            <li class="mb-3">- Tiền phòng: 500,000đ/Tháng</li>
+                            <li class="mb-3">- Tiền điện: 3,500đ/kWh</li>
+                            <li class="mb-3">- Tiền nước: 100,000đ/Người</li>
+                            <li class="mb-3">- Phí dịch vụ chung: 150,000đ/Tháng</li>
+                            <li class="mb-3">- Internet tốc độ cao: 200,000đ/Tháng</li>
+                            <li class="mb-3">- Gửi xe máy: 100,000đ/xe</li>
+                            <li class="mb-3">- Vệ sinh hành lang: Miễn phí</li>
+                            <li class="mb-3">- An ninh: Camera 24/7</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+{% endblock %}

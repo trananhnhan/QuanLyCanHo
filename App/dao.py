@@ -62,6 +62,26 @@ def taikhoan_co_thue():
         return NguoiThue.query.filter(NguoiThue.id_taikhoan == current_user.id).first()
     return None
 
+def tao_taikhoan(username = None, password = None, avatar = None):
+    password = hashlib.md5(password.encode("utf-8")).hexdigest()
+    if avatar:
+        print("yes avatar")
+        taikhoan = TaiKhoan()
+        taikhoan.username = username.strip()
+        taikhoan.password = password
+        taikhoan.avatar = avatar
+    else:
+        print("no avatar")
+        taikhoan = TaiKhoan()
+        taikhoan.username = username.strip()
+        taikhoan.password = password
+
+    db.session.add(taikhoan)
+    db.session.commit()
+    return taikhoan
+
+
+
 if __name__ == '__main__':
     with app.app_context():
-        print(taikhoan_co_thue())
+        print(tao_taikhoan(username="user3",password="123",avatar="https://res.cloudinary.com/dddesdoxw/image/upload/v1766064625/main-sample.png"))

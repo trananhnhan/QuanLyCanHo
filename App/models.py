@@ -122,8 +122,9 @@ def create_fake_data():
     admin_acc = TaiKhoan(username="admin", password=pwhash, role=UserRole.ADMIN)
     user_acc1 = TaiKhoan(username="nguyenvana", password=pwhash, role=UserRole.USER)
     user_acc2 = TaiKhoan(username="tranthib", password=pwhash, role=UserRole.USER)
+    user_acc3 = TaiKhoan(username="user1", password=pwhash, role=UserRole.USER)
 
-    db.session.add_all([admin_acc, user_acc1, user_acc2])
+    db.session.add_all([admin_acc, user_acc1, user_acc2,user_acc3])
     db.session.commit()  # Commit để lấy ID cho các bước sau
 
     # 2. Tạo Người Thuê (Gắn với tài khoản)
