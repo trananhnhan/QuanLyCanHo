@@ -393,3 +393,52 @@
     background: #94a3b8;
     border-radius: 10px;
 }
+
+/* Trang chủ khi có thuê*/
+/* --- Dashboard Card Style --- */
+
+.dashboard-card {
+    background-color: #EAEBFA; /* Màu nền tím rất nhạt giống ảnh */
+    border-radius: 20px;       /* Bo góc mềm mại */
+    padding: 2rem;             /* Khoảng cách nội dung bên trong */
+    border: 1px solid rgba(0,0,0,0.03); /* Viền siêu mỏng */
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;    /* Để đẩy nút Xem ngay xuống đáy nếu cần */
+}
+
+/* Hiệu ứng hover cho card: Bay lên nhẹ */
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    background-color: #e2e4f5; /* Đậm hơn xíu khi hover */
+}
+
+/* Hộp chứa Icon vuông màu trắng */
+.icon-box-small {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Link "Xem ngay" */
+.read-more-link {
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    transition: gap 0.2s; /* Hiệu ứng đẩy mũi tên */
+}
+
+.read-more-link:hover {
+    gap: 5px; /* Mũi tên dịch sang phải khi hover */
+}
+
+/* Tinh chỉnh lại main-content-card để padding rộng hơn chút cho đẹp */
+.main-content-card {
+    border-radius: 30px; /* Bo góc to hơn cho khung ngoài */
+}

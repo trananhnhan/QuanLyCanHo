@@ -2,8 +2,107 @@
 
 {%block content%}
 {%if taikhoan_co_thue%}
+<main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
+    <div class="container" style="max-width: 1200px;">
 
-hello {{taikhoan_co_thue.congviec}}
+        <div class="main-content-card shadow-sm p-5">
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                <div class="col">
+                    <div class="dashboard-card h-100">
+                        <div class="icon-box-small mb-4">
+                            <i class="bi bi-house fs-4 text-dark"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Phòng</h4>
+                        <p class="text-secondary mb-4 small flex-grow-1">
+                            Xem tên, mô tả, dịch vụ và các thông tin liên quan căn phòng bạn đang thuê.
+                        </p>
+                        <a href="/phong" class="read-more-link fw-bold text-primary text-decoration-none">
+                            Xem ngay <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="dashboard-card h-100">
+                        <div class="icon-box-small mb-4">
+                            <i class="bi bi-file-text fs-4 text-dark"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Hợp đồng</h4>
+                        <p class="text-secondary mb-4 small flex-grow-1">
+                            Xem những thông tin bạn đã cam kết như ngày bắt đầu, ngày hết hạn và các thông tin thêm.
+                        </p>
+                        <a href="/hop-dong" class="read-more-link fw-bold text-primary text-decoration-none">
+                            Xem ngay <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="dashboard-card h-100">
+                        <div class="icon-box-small mb-4">
+                            <i class="bi bi-cash-coin fs-4 text-dark"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Chi tiêu</h4>
+                        <p class="text-secondary mb-4 small flex-grow-1">
+                            Xem các hóa đơn bạn đã trả, tổng hợp các chi tiêu mà bạn đã dùng trong thời hạn hợp đồng.
+                        </p>
+                        <a href="/chi-tieu" class="read-more-link fw-bold text-primary text-decoration-none">
+                            Xem ngay <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="dashboard-card h-100">
+                        <div class="icon-box-small mb-4">
+                            <i class="bi bi-receipt fs-4 text-dark"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Thanh toán</h4>
+                        <p class="text-secondary mb-4 small flex-grow-1">
+                            Thanh toán các hóa đơn bạn chưa trả từ các tháng trong hạn hợp đồng.
+                        </p>
+                        <a href="/thanh-toan" class="read-more-link fw-bold text-primary text-decoration-none">
+                            Xem ngay <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="dashboard-card h-100">
+                        <div class="icon-box-small mb-4">
+                            <i class="bi bi-envelope fs-4 text-dark"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Gửi yêu cầu</h4>
+                        <p class="text-secondary mb-4 small flex-grow-1">
+                            Gửi yêu cầu trợ giúp khi có vấn đề xuất hiện hoặc khi bạn có thắc mắc về bất cứ vấn đề gì.
+                        </p>
+                        <a href="/yeu-cau" class="read-more-link fw-bold text-primary text-decoration-none">
+                            Xem ngay <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="dashboard-card h-100">
+                        <div class="icon-box-small mb-4">
+                            <i class="bi bi-newspaper fs-4 text-dark"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Bản tin thị trường</h4>
+                        <p class="text-secondary mb-4 small flex-grow-1">
+                            Xem các bản tin thị trường để có thể hiểu rõ hơn về sự thay đổi giá cả nếu có trong tương lai.
+                        </p>
+                        <a href="/tin-tuc" class="read-more-link fw-bold text-primary text-decoration-none">
+                            Xem ngay <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
 {%elif current_user.is_authenticated%}
 <section class="hero-section container">
     <div class="divider-heading">
