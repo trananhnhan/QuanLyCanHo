@@ -146,7 +146,7 @@ def create_fake_data():
     nt3 = NguoiThue(
         ho="Trần Anh", ten="Nhân",
         ngaysinh=datetime(1998, 8, 15),
-        congviec="Kế toán",
+        congviec="IT",
         sodienthoai="0909888999",
         id_taikhoan=user_acc3.id
     )
@@ -203,23 +203,39 @@ def create_fake_data():
         ngayketthuc=datetime(2025, 1, 1),
         tiencoc=5000000,
         id_canho=ch1.id,
-        id_nguoithue=nt1.id
+        id_nguoithue=nt1.id,
+        active = False
     )
     hd2 = HopDong(
         ngaybatdau=datetime(2024, 1, 1),
         ngayketthuc=datetime(2025, 1, 1),
         tiencoc=5000000,
         id_canho=ch1.id,
-        id_nguoithue=nt2.id
+        id_nguoithue=nt2.id,
+        active=False
     )
     hd3 = HopDong(
         ngaybatdau=datetime(2024, 1, 1),
-        ngayketthuc=datetime(2025, 1, 1),
+        ngayketthuc=datetime(2026, 1, 1),
         tiencoc=5000000,
         id_canho=ch1.id,
         id_nguoithue=nt3.id
     )
-    db.session.add_all([hd1,hd2,hd3])
+    hd4 = HopDong(
+        ngaybatdau=datetime(2024, 1, 1),
+        ngayketthuc=datetime(2026, 1, 1),
+        tiencoc=5000000,
+        id_canho=ch4.id,
+        id_nguoithue=nt3.id
+    )
+    hd5 = HopDong(
+        ngaybatdau=datetime(2024, 1, 1),
+        ngayketthuc=datetime(2026, 1, 1),
+        tiencoc=5000000,
+        id_canho=ch7.id,
+        id_nguoithue=nt1.id
+    )
+    db.session.add_all([hd1,hd2,hd3,hd4,hd5])
     db.session.commit()
 
     # 7. Tạo Hóa Đơn (Tháng 2/2024 cho Hợp đồng 1)
@@ -228,10 +244,23 @@ def create_fake_data():
 
     hdon1 = HoaDon(
         id_hopdong=hd1.id,
-        ngaythanhtoan=datetime(2024, 2, 5),  # Đã thanh toán ngày 5
-        tongtien=tong_tien_tinh_toan
+        ngaythanhtoan=datetime(2025, 12, 5),  # Đã thanh toán ngày 5
+        tongtien=tong_tien_tinh_toan,
+        create_date = datetime(2025,12,1)
     )
-    db.session.add(hdon1)
+    hdon2 = HoaDon(
+        id_hopdong=hd1.id,
+        ngaythanhtoan=datetime(2025, 12, 5),  # Đã thanh toán ngày 5
+        tongtien=tong_tien_tinh_toan,
+        create_date = datetime(2025,12,1)
+    )
+    hdon3 = HoaDon(
+        id_hopdong=hd1.id,
+        ngaythanhtoan=datetime(2025, 12, 5),  # Đã thanh toán ngày 5
+        tongtien=tong_tien_tinh_toan,
+        create_date = datetime(2025,12,1)
+    )
+    db.session.add([hdon1,hdon2,hdon3])
     db.session.commit()
 
     # 8. Chi Tiết Hóa Đơn (Lưu snapshot giá tại thời điểm đó)

@@ -1,7 +1,8 @@
 {%extends 'layout/base.html'%}
 
 {%block content%}
-{%if taikhoan_co_thue%}
+{%if tai_khoan_co_thue%}
+
 <main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
     <div class="container" style="max-width: 1200px;">
 
@@ -16,9 +17,9 @@
                         </div>
                         <h4 class="fw-bold mb-3">Phòng</h4>
                         <p class="text-secondary mb-4 small flex-grow-1">
-                            Xem tên, mô tả, dịch vụ và các thông tin liên quan căn phòng bạn đang thuê.
+                            Xem tên, mô tả, dịch vụ và các thông tin liên quan đến các căn phòng mà bạn đang thuê.
                         </p>
-                        <a href="/phong" class="read-more-link fw-bold text-primary text-decoration-none">
+                        <a href="/phong?idnguoithue={{tai_khoan_co_thue.id}}" class="read-more-link fw-bold text-primary text-decoration-none">
                             Xem ngay <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -33,7 +34,7 @@
                         <p class="text-secondary mb-4 small flex-grow-1">
                             Xem những thông tin bạn đã cam kết như ngày bắt đầu, ngày hết hạn và các thông tin thêm.
                         </p>
-                        <a href="/hop-dong" class="read-more-link fw-bold text-primary text-decoration-none">
+                        <a href="/hopdong" class="read-more-link fw-bold text-primary text-decoration-none">
                             Xem ngay <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -48,7 +49,7 @@
                         <p class="text-secondary mb-4 small flex-grow-1">
                             Xem các hóa đơn bạn đã trả, tổng hợp các chi tiêu mà bạn đã dùng trong thời hạn hợp đồng.
                         </p>
-                        <a href="/chi-tieu" class="read-more-link fw-bold text-primary text-decoration-none">
+                        <a href="/chitieu" class="read-more-link fw-bold text-primary text-decoration-none">
                             Xem ngay <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -63,7 +64,7 @@
                         <p class="text-secondary mb-4 small flex-grow-1">
                             Thanh toán các hóa đơn bạn chưa trả từ các tháng trong hạn hợp đồng.
                         </p>
-                        <a href="/thanh-toan" class="read-more-link fw-bold text-primary text-decoration-none">
+                        <a href="/thanhtoan" class="read-more-link fw-bold text-primary text-decoration-none">
                             Xem ngay <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -78,7 +79,7 @@
                         <p class="text-secondary mb-4 small flex-grow-1">
                             Gửi yêu cầu trợ giúp khi có vấn đề xuất hiện hoặc khi bạn có thắc mắc về bất cứ vấn đề gì.
                         </p>
-                        <a href="/yeu-cau" class="read-more-link fw-bold text-primary text-decoration-none">
+                        <a href="/yeucau" class="read-more-link fw-bold text-primary text-decoration-none">
                             Xem ngay <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -93,7 +94,7 @@
                         <p class="text-secondary mb-4 small flex-grow-1">
                             Xem các bản tin thị trường để có thể hiểu rõ hơn về sự thay đổi giá cả nếu có trong tương lai.
                         </p>
-                        <a href="/tin-tuc" class="read-more-link fw-bold text-primary text-decoration-none">
+                        <a href="/tintuc" class="read-more-link fw-bold text-primary text-decoration-none">
                             Xem ngay <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -103,7 +104,9 @@
         </div>
     </div>
 </main>
+
 {%elif current_user.is_authenticated%}
+
 <section class="hero-section container">
     <div class="divider-heading">
         <h2>Căn Hộ Hoàng Kim</h2>
@@ -125,7 +128,9 @@
 
     </div>
 </section>
+
 {%else%}
+
 <section class="hero-section container">
     <div class="divider-heading">
         <h2>Căn Hộ Hoàng Kim</h2>
@@ -141,10 +146,13 @@
         <a href="/dangnhap">
             <button class="btn btn-primary hero-btn">Đăng nhập</button>
         </a>
+        <a href="/dangky">
+             <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Đăng ký</button>
+        </a>
 
-        <button class="btn btn-light border-primary text-primary hero-btn btn-custom-hover">Đăng ký</button>
     </div>
 </section>
+
 {%endif%}
 
 

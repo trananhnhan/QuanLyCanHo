@@ -442,3 +442,79 @@
 .main-content-card {
     border-radius: 30px; /* Bo góc to hơn cho khung ngoài */
 }
+
+/* hopdong */
+/* --- Style cho trang Hợp đồng --- */
+
+/* Vùng cuộn cho khung trắng bọc ngoài */
+.scrollable-main-content {
+    max-height: 75vh; /* Chiều cao tối đa bằng 75% chiều cao màn hình */
+    overflow-y: auto; /* Hiện thanh cuộn dọc khi nội dung dài */
+    background-color: #ffffff;
+}
+
+/* Thẻ hợp đồng con (màu tím nhạt) */
+.contract-item-card {
+    background-color: #DBE0F0; /* Màu tím nhạt đồng bộ các trang trước */
+    border-radius: 25px;       /* Bo góc lớn theo style image_f18f65.png */
+    border: none;
+    transition: transform 0.2s;
+}
+
+.contract-item-card:hover {
+    transform: scale(1.02);
+}
+
+.contract-info-list p {
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Tùy chỉnh thanh cuộn cho khung chính */
+.scrollable-main-content::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable-main-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.scrollable-main-content::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 10px;
+}
+
+/* chi tieu */
+/* --- Style trang Chi tiêu --- */
+
+/* Khối tổng hợp phía trên */
+.summary-box {
+    background-color: #DBE0F0; /* Màu tím nhạt chủ đạo */
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Thẻ Biên lai con */
+.receipt-card {
+    background-color: #DBE0F0;
+    border-radius: 25px;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.receipt-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.receipt-details p {
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+
+/* Tận dụng lại class cuộn đã làm ở trang Hợp đồng */
+.scrollable-main-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: #ffffff;
+}

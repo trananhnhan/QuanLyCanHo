@@ -4,7 +4,9 @@
 
 <div class="container py-5 content-container">
     <!--loc-->
-    <div class="row mb-4">
+    {%if tai_khoan_co_thue and request.args.get('idnguoithue') %}
+    {%else%}
+           <div class="row mb-4">
         <div class="col-12">
             <form action="" method="GET">
                 <div class="d-flex align-items-center flex-wrap gap-2 mb-4 bg-white p-3 rounded shadow-sm">
@@ -50,10 +52,13 @@
             </form>
         </div>
     </div>
+    {%endif%}
+
 
     <!--card-->
     <div class="row g-4">
         {% for r in rooms%}
+
         <div class="col-12 col-sm-6 col-md-3">
             <div class="card room-card text-center h-100">
                 <div class="card-img-placeholder">
@@ -63,7 +68,10 @@
                     <h5 class="room-title">Phòng {{r.ten}}</h5>
                     <div class="d-flex justify-content-between mt-3 gap-2">
                             <a href="/chitietphong/{{r.id}}" class="btn btn-view flex-grow-1">Xem</a>
+                            {%if tai_khoan_co_thue and request.args.get('idnguoithue')%}
+                            {%else%}
                             <a href="/lienhe" class="btn btn-rent flex-grow-1">Thuê</a>
+                            {%endif%}
                     </div>
                 </div>
             </div>
