@@ -518,3 +518,64 @@
     overflow-y: auto;
     background-color: #ffffff;
 }
+
+/* bienlai */
+/* --- Style Trang Chi Tiết Biên Lai --- */
+
+/* Card chứa bảng chi tiết */
+.bill-detail-card {
+    background-color: #dbe0f0;
+    border-radius: 20px;
+    min-height: 400px; /* Đảm bảo độ cao tối thiểu */
+}
+
+/* Card thông tin phòng bên phải */
+.room-info-card {
+    background-color: #dbe0f0;
+    border-radius: 20px;
+    height: 300px; /* Chiều cao cố định như trong ảnh */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Thanh tổng tiền bên dưới */
+.total-amount-bar {
+    background-color: #d0d5e8; /* Đậm hơn một chút so với nền tím nhạt */
+    color: #1e293b;
+    border-radius: 20px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Vùng chứa danh sách items (Hỗ trợ cuộn) */
+.bill-items-container {
+    overflow-y: auto;
+    max-height: 300px; /* Giới hạn chiều cao để hiện thanh cuộn nếu dài */
+}
+
+/* Style cho các dòng trong bảng */
+.bill-row-header {
+    border-bottom-color: #94a3b8 !important; /* Màu đường kẻ đậm hơn cho header */
+    font-size: 1.1rem;
+    color: #334155;
+}
+
+.bill-row-item {
+    font-size: 1.05rem;
+    color: #334155;
+    border-bottom-color: rgba(0,0,0,0.05) !important;
+}
+
+.bill-row-item:last-child {
+    border-bottom: none !important; /* Bỏ đường kẻ ở dòng cuối */
+}
+
+/* Tùy chỉnh thanh cuộn cho bảng */
+.bill-items-container::-webkit-scrollbar {
+    width: 6px;
+}
+.bill-items-container::-webkit-scrollbar-thumb {
+    background-color: #94a3b8;
+    border-radius: 10px;
+}

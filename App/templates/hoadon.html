@@ -1,0 +1,36 @@
+{%extends 'layout/base.html' %}
+
+{% block content %}
+<main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
+    <div class="container" style="max-width: 1200px;">
+
+        <div class="main-content-card shadow-sm p-5 scrollable-main-content">
+
+            <div class="summary-box p-4 mb-5 text-center">
+                <h2 class="fw-bold m-0" style="color: #1e293b;">Các Hóa Đơn Chưa Trả</h2>
+                (bạn còn <span class="fw-bold"> {{tong_hoa_don}}</span> hóa đơn chưa trả, tổng cộng là <span class="fw-bold">{{"{:,.0f}".format(tong_tien)}}đ</span>)
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {%for hd in ds_hoa_don%}
+                <div class="col">
+                    <div class="receipt-card p-4 h-100 d-flex flex-column">
+                        <h5 class="text-center fw-bold mb-4">Hóa đơn tháng {{hd.create_date.strftime('%m')}} - {{hd.hopdong.canho.ten}} </h5>
+                        <div class="receipt-details flex-grow-1">
+
+                            <p class="mb-2">Ngày lập: <span class="fw-bold"> {{hd.create_date.strftime('%d/%m/%Y')}}</span></p>
+                            <p class="mb-4">Tổng tiền:<span class="fw-bold">{{"{:,.0f}".format(hd.tongtien)}}đ</span></p>
+                        </div>
+                        <div class="text-end">
+                            <a href="/chitiethoadon/{{hd.id}}" class="btn btn-primary px-4 fw-bold rounded-3 shadow-sm">Thanh Toán</a>
+
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

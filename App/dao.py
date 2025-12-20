@@ -108,9 +108,61 @@ def phan_trang_tu_ds_can_ho(ds_can_ho,page = 0):
     ds_can_ho_moi = ds_can_ho[start:start+size]
     return ds_can_ho_moi
 
+def get_ds_hoa_don_da_tra_tu_hop_dong(id_hop_dong):
+    return HoaDon.query.filter(HoaDon.id_hopdong == id_hop_dong,HoaDon.ngaythanhtoan != None).all()
+def get_ds_hoa_don_chua_tra_tu_hop_dong(id_hop_dong):
+    return HoaDon.query.filter(HoaDon.id_hopdong == id_hop_dong, HoaDon.ngaythanhtoan == None).all()
+
+def get_ds_hoa_don_da_tra_tu_nguoi_thue(id_nguoi_thue):
+    ds_hop_dong = get_ds_hop_dong_active_tu_nguoi_thue(id_nguoi_thue)
+    ds_hoa_don = []
+    for hd in ds_hop_dong:
+        ds_hoa_don.extend(get_ds_hoa_don_da_tra_tu_hop_dong(hd.id))
+    return ds_hoa_don
+
+def get_ds_hoa_don_chua_tra_tu_nguoi_thue(id_nguoi_thue):
+    ds_hop_dong = get_ds_hop_dong_active_tu_nguoi_thue(id_nguoi_thue)
+    ds_hoa_don = []
+    for hd in ds_hop_dong:
+        ds_hoa_don.extend(get_ds_hoa_don_chua_tra_tu_hop_dong(hd.id))
+    return ds_hoa_don
+
+def tinh_tong_tien_da_tra_tu_nguoi_thue(id_nguoi_thue):
+    ds_hoa_don = get_ds_hoa_don_da_tra_tu_nguoi_thue(id_nguoi_thue)
+    tong = 0
+    for hd in ds_hoa_don:
+        tong += hd.tongtien
+    return tong or 0
+
+def tinh_tong_tien_chua_tra_tu_nguoi_thue(id_nguoi_thue):
+    ds_hoa_don = get_ds_hoa_don_chua_tra_tu_nguoi_thue(id_nguoi_thue)
+    tong = 0
+    for hd in ds_hoa_don:
+        tong += hd.tongtien
+    return tong or 0
+
+def count_tong_hoa_don_da_tra_tu_nguoi_thue(id_nguoi_thue):
+    ds_hoa_don = get_ds_hoa_don_da_tra_tu_nguoi_thue(id_nguoi_thue)
+    tong = 0
+    for hd in ds_hoa_don:
+        tong += 1
+    return tong or 0
+
+
+def count_tong_hoa_don_chua_tra_tu_nguoi_thue(id_nguoi_thue):
+    ds_hoa_don = get_ds_hoa_don_chua_tra_tu_nguoi_thue(id_nguoi_thue)
+    tong = 0
+    for hd in ds_hoa_don:
+        tong += 1
+    return tong or 0
+
+def get_ds_chi_tiet_hoa_don_tu_hoa_don(id_hoa_don):
+    return ChiTietHoaDon.query.filter(ChiTietHoaDon.id_hoadon == id_hoa_don).all()
+
+def get_hoa_don_by_id(id):
+    return HoaDon.query.filter(HoaDon.id == id).first()
 
 if __name__ == '__main__':
     with app.app_context():
-        for hd in get_ds_hop_dong_active_tu_nguoi_thue(3):
-            print(hd.ngaybatdau.strftime('%d/%m/%Y'))
+        print(get_ds_chi_tiet_hoa_don_tu_hoa_don(3))
 

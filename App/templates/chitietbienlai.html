@@ -1,0 +1,69 @@
+{%extends 'layout/base.html' %}
+
+{% block content %}
+<main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
+    <div class="container" style="max-width: 1200px;">
+
+        <div class="main-content-card shadow-sm p-4 p-lg-5">
+            <div class="row g-4 g-lg-5 h-100">
+
+                <div class="col-lg-7 d-flex flex-column gap-3">
+
+                    <div class="bill-detail-card p-4 flex-grow-1 d-flex flex-column">
+                        <h2 class="text-center fw-bold mb-4" style="color: #1e293b;">Hóa Đơn</h2>
+
+                        <div class="bill-row-header d-flex text-center fw-bold mb-3 pb-2 border-bottom border-secondary">
+                            <div class="col-3 text-start">Tên</div>
+                            <div class="col-3">Đơn giá</div>
+                            <div class="col-1">SL</div>
+                            <div class="col-2">Đơn Vị</div>
+                            <div class="col-3 text-end">Tổng</div>
+                        </div>
+
+                        <div class="bill-items-container flex-grow-1 pe-2">
+                            {%for CTHD in ds_chi_tiet_hoa_don%}
+                            <div class="bill-row-item d-flex text-center py-3 border-bottom border-light-subtle align-items-center">
+                                <div class="col-3 text-start fw-medium">{{CTHD.chitietphi.loaiphi.ten}}</div>
+                                <div class="col-3">{{"{:,.0f}".format(CTHD.chitietphi.sotienthu)}}</div>
+                                <div class="col-1">{{CTHD.soluong}}</div>
+                                <div class="col-2">{{CTHD.chitietphi.donvi}}</div>
+                                <div class="col-3 text-end fw-bold">{{"{:,.0f}".format(CTHD.chitietphi.sotienthu*CTHD.soluong)}}</div>
+                            </div>
+                            {%endfor%}
+
+
+                        </div>
+                    </div>
+
+                    <div class="total-amount-bar p-4 text-center rounded-4 mt-auto">
+                        <span class="fs-3 fw-medium me-3">Tổng Tiền:</span>
+                        <span class="fs-2 fw-bold">{{"{:,.0f}".format(hoa_don.tongtien)}}</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5 d-flex flex-column gap-4">
+
+                    <div class="room-info-card p-5 text-center">
+                        <h2 class="fw-bold mb-4" style="color: #1e293b;">Phòng {{hoa_don.hopdong.canho.ten}}</h2>
+                        <p class="fs-5 mb-0 text-secondary fw-medium">
+                            Ngày lập: {{hoa_don.create_date.strftime('%d/%m/%Y')}}
+                        </p>
+                        <p class="fs-5 mb-0 text-secondary fw-medium">
+                            Ngày trả: {{hoa_don.ngaythanhtoan.strftime('%d/%m/%Y')}}
+                        </p>
+                    </div>
+
+                    <div class="mt-auto d-flex gap-3">
+                        <a href="/hoadon"
+                           class="btn btn-outline-primary py-3 px-4 fw-bold flex-grow-1 rounded-3 bg-white btn-custom-hover-DangKy">
+                            Quay về
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

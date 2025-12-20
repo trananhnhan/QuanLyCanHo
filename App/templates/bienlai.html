@@ -1,0 +1,46 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
+    <div class="container" style="max-width: 1200px;">
+
+        <div class="main-content-card shadow-sm p-5 scrollable-main-content">
+
+            <div class="summary-box p-4 mb-5">
+                <p class="fs-5 fw-medium mb-3">
+                    Tổng tiền bạn đã chi khi thuê căn hộ ở đây là :
+                    <span class="fw-bold">{{"{:,.0f}".format(tong_tien)}}đ</span>
+                </p>
+                <p class="fs-5 mb-0">
+                    bạn đã trả tổng cộng là
+                    <span class="fw-bold">{{tong_hoa_don}}</span>
+                    hóa đơn
+                </p>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                {%for hd in ds_hoa_don%}
+                <div class="col">
+                    <div class="receipt-card p-4 h-100 d-flex flex-column">
+                        <h5 class="text-center fw-bold mb-4">Biên lai tháng {{hd.create_date.strftime('%m')}} - {{hd.hopdong.canho.ten}} </h5>
+                        <div class="receipt-details flex-grow-1">
+
+                            <p class="mb-2">Ngày lập: <span class="fw-bold">{{hd.create_date.strftime('%d/%m/%Y')}}</span></p>
+                            <p class="mb-2">Ngày trả: <span class="fw-bold">{{hd.ngaythanhtoan.strftime('%d/%m/%Y')}}</span></p>
+                            <p class="mb-4">Tổng tiền: <span class="fw-bold">{{"{:,.0f}".format(hd.tongtien)}}đ</span></p>
+                        </div>
+                        <div class="text-end">
+                            <a href="/chitietbienlai/{{hd.id}}" class="btn btn-primary px-4 fw-bold rounded-3 shadow-sm">Xem Chi Tiết</a>
+
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

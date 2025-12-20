@@ -9,13 +9,16 @@ from App import app, login, dao, db
 from App.dao import tai_khoan_co_thue
 from App.decorators import anonymous_required
 
+
 @login.user_loader
 def get_user(user_id):
     return dao.get_tai_khoan_by_id(user_id)
 
+
 @app.route('/')
 def index():
-    return render_template('index.html',tai_khoan_co_thue = tai_khoan_co_thue())
+    return render_template('index.html', tai_khoan_co_thue=tai_khoan_co_thue())
+
 
 @app.route('/phong')
 def phong():
@@ -29,13 +32,15 @@ def phong():
     if id_nguoi_thue:
         rooms_no_page = dao.chuyen_ds_hop_dong_qua_ds_can_ho(dao.get_ds_hop_dong_active_tu_nguoi_thue(id_nguoi_thue))
         pages = math.ceil(len(rooms_no_page) / app.config["PAGE_SIZE"])
-        rooms = dao.phan_trang_tu_ds_can_ho(ds_can_ho=rooms_no_page,page=page)
+        rooms = dao.phan_trang_tu_ds_can_ho(ds_can_ho=rooms_no_page, page=page)
 
-    return render_template('phong.html',rooms = rooms,pages=pages,tai_khoan_co_thue = tai_khoan_co_thue())
+    return render_template('phong.html', rooms=rooms, pages=pages, tai_khoan_co_thue=tai_khoan_co_thue())
+
 
 @app.route('/lienhe')
 def lienhe():
     return render_template("lienhe.html")
+
 
 @app.route("/dangnhap", methods=["get", "post"])
 @anonymous_required
@@ -54,6 +59,7 @@ def dangnhap():
             err_msg = "Tài khoản hoặc mật khẩu không đúng!"
 
     return render_template("dangnhap.html", err_msg=err_msg)
+
 
 @app.route("/dangxuat")
 def dangxuat():
@@ -81,7 +87,7 @@ def register():
                 print(file_path)
 
             try:
-                dao.tao_tai_khoan(username= username,password=password,avatar=file_path)
+                dao.tao_tai_khoan(username=username, password=password, avatar=file_path)
                 return redirect('/dangnhap')
             except:
                 db.session.rollback()
@@ -91,13 +97,15 @@ def register():
 
     return render_template("dangky.html", err_msg=err_msg)
 
+
 @app.route("/chitietphong/<int:id>")
 def chitietphong(id):
     phong = dao.get_phong_by_id(id)
     so_nguoi_thue = dao.count_nguoi_dang_thue_phong(id)
     dichvu = dao.get_ds_dich_vu_tu_phong(id)
-    print(so_nguoi_thue,phong)
-    return render_template("chitietphong.html",phong = phong,so_nguoi_thue = so_nguoi_thue,dichvu = dichvu)
+    print(so_nguoi_thue, phong)
+    return render_template("chitietphong.html", phong=phong, so_nguoi_thue=so_nguoi_thue, dichvu=dichvu)
+
 
 @app.route("/hopdong")
 def hopdong():
@@ -105,14 +113,53 @@ def hopdong():
     if nguoi_thue is None:
         return redirect("/")
     ds_hop_dong = dao.get_ds_hop_dong_active_tu_nguoi_thue(nguoi_thue.id)
-    return render_template("hopdong.html",ds_hop_dong = ds_hop_dong)
+    return render_template("hopdong.html", ds_hop_dong=ds_hop_dong)
+
 
 @app.route("/chitieu")
-def chitieu():
+def bienlai():
     nguoi_thue = dao.tai_khoan_co_thue()
     if nguoi_thue is None:
         return redirect("/")
-    return render_template("chitieu.html")
+    tong_tien = dao.tinh_tong_tien_da_tra_tu_nguoi_thue(nguoi_thue.id)
+    tong_hoa_don = dao.count_tong_hoa_don_da_tra_tu_nguoi_thue(nguoi_thue.id)
+    ds_hoa_don = dao.get_ds_hoa_don_da_tra_tu_nguoi_thue(nguoi_thue.id)
+
+    return render_template("bienlai.html", tong_tien=tong_tien, ds_hoa_don=ds_hoa_don, tong_hoa_don=tong_hoa_don)
+
+
+@app.route("/hoadon")
+def hoadon():
+    nguoi_thue = dao.tai_khoan_co_thue()
+    if nguoi_thue is None:
+        return redirect("/")
+    tong_tien = dao.tinh_tong_tien_chua_tra_tu_nguoi_thue(nguoi_thue.id)
+    tong_hoa_don = dao.count_tong_hoa_don_chua_tra_tu_nguoi_thue(nguoi_thue.id)
+    ds_hoa_don = dao.get_ds_hoa_don_chua_tra_tu_nguoi_thue(nguoi_thue.id)
+    return render_template("hoadon.html", tong_tien=tong_tien, ds_hoa_don=ds_hoa_don, tong_hoa_don=tong_hoa_don)
+
+
+@app.route("/chitiethoadon/<int:id>")
+def chitiethoadon(id):
+    hoa_don = dao.get_hoa_don_by_id(id)
+    nguoi_thue = dao.tai_khoan_co_thue()
+    if nguoi_thue is None:
+        return redirect("/")
+    ds_chi_tiet_hoa_don = dao.get_ds_chi_tiet_hoa_don_tu_hoa_don(hoa_don.id)
+
+    return render_template("chitiethoadon.html", ds_chi_tiet_hoa_don=ds_chi_tiet_hoa_don, hoa_don=hoa_don)
+
+@app.route("/chitietbienlai/<int:id>")
+def chitietbienlai(id):
+    hoa_don = dao.get_hoa_don_by_id(id)
+    nguoi_thue = dao.tai_khoan_co_thue()
+    if nguoi_thue is None:
+        return redirect("/")
+    ds_chi_tiet_hoa_don = dao.get_ds_chi_tiet_hoa_don_tu_hoa_don(hoa_don.id)
+
+    return render_template("chitietbienlai.html", ds_chi_tiet_hoa_don=ds_chi_tiet_hoa_don, hoa_don=hoa_don)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
