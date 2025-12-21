@@ -519,7 +519,7 @@
     background-color: #ffffff;
 }
 
-/* bienlai */
+/* bienlai, hoa don */
 /* --- Style Trang Chi Tiết Biên Lai --- */
 
 /* Card chứa bảng chi tiết */
@@ -578,4 +578,122 @@
 .bill-items-container::-webkit-scrollbar-thumb {
     background-color: #94a3b8;
     border-radius: 10px;
+}
+
+/* yeu cau */
+/* --- Style Form Yêu Cầu --- */
+
+/* Tùy chỉnh ô input và textarea */
+.main-content-card .form-control {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    color: #495057;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+/* Hiệu ứng khi bấm vào nhập liệu */
+.main-content-card .form-control:focus {
+    border-color: #86b7fe; /* Màu xanh lơ */
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1); /* Hiệu ứng tỏa sáng nhẹ */
+    background-color: #fff;
+}
+
+/* Label (Chữ "Tiêu đề") */
+.main-content-card .form-label {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* tin tuc*/
+/* --- Style Bản Tin Thị Trường --- */
+
+.news-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden; /* Để ảnh bo góc theo card */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: #cbd5e1;
+}
+
+/* Khung ảnh bài viết */
+.news-img-box {
+    height: 200px;
+    background-color: #f1f5f9;
+    overflow: hidden;
+}
+
+.news-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ảnh phủ kín khung */
+    transition: transform 0.5s ease;
+}
+
+/* Hiệu ứng zoom ảnh khi hover */
+.news-card:hover .news-img-box img {
+    transform: scale(1.05);
+}
+
+/* Tiện ích cắt chữ (Line Clamp) */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiện tối đa 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Hiện tối đa 3 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Biến thẻ <a> phủ kín cả card để bấm vào đâu cũng được */
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+.news-card {
+    position: relative; /* Cần cho stretched-link hoạt động */
+}
+
+/* thanhtoan */
+/* --- Bổ sung cho trang Thanh Toán QR --- */
+
+/* Chỉnh lại vùng QR cho to và rõ hơn chút so với trang Liên hệ */
+.qr-container {
+    border-radius: 20px; /* Bo góc vừa phải */
+    border: 1px solid #e2e8f0;
+    padding: 10px; /* Tạo khoảng trắng đệm xung quanh QR */
+    background-color: white !important;
+}
+
+/* Nút xác nhận thanh toán (Màu xanh đậm) */
+.contact-btn-main {
+    background-color: #1a73e8;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 40px; /* Nút to rộng */
+    border-radius: 50px; /* Bo tròn kiểu viên thuốc */
+    transition: all 0.3s;
+}
+
+.contact-btn-main:hover {
+    background-color: #1557b0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
 }

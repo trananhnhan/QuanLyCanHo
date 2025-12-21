@@ -1,0 +1,36 @@
+{%extends 'layout/base.html'%}
+{% block content %}
+<main class="flex-grow-1 py-5 d-flex align-items-center justify-content-center">
+    <div class="container" style="max-width: 1200px;">
+
+        <div class="main-content-card shadow-sm py-5 d-flex align-items-center justify-content-center">
+
+            <div class="contact-card shadow-none border-0" style="max-width: 500px;">
+
+                <div class="qr-container mb-4" style="height: 450px; background-color: #f8f9fa;">
+                    <img src="https://img.vietqr.io/image/MB-99993838686838-compact2.png?amount={{ hoa_don.tongtien }}&addInfo=Thanh toan HD {{ hoa_don.id }}"
+                         alt="QR Thanh Toán"
+                         class="qr-code w-100 h-100"
+                         style="object-fit: contain;">
+                </div>
+
+                <div class="contact-info text-center">
+                    <h2 class="fw-bold mb-1" style="color: #1e293b;">TRẦN ANH NHÂN</h2>
+                    <p class="text-secondary mb-4">
+                        Ngân hàng MB Bank - STK: 99993838686838 <br>
+                        Số tiền: <span class="fw-bold text-primary">{{ "{:,.0f}".format(hoa_don.tongtien) }}đ</span>
+                    </p>
+
+                    <div class="d-flex justify-content-center gap-3">
+                            <a href="/hoadon" class="btn btn-primary contact-btn-main shadow-sm px-5">
+                                xem các hóa đơn khác
+                            </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+{% endblock %}

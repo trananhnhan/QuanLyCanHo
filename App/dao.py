@@ -162,7 +162,14 @@ def get_ds_chi_tiet_hoa_don_tu_hoa_don(id_hoa_don):
 def get_hoa_don_by_id(id):
     return HoaDon.query.filter(HoaDon.id == id).first()
 
+def add_yeu_cau(tieude = None, noidung = None,id_tai_khoan = None):
+    yc = YeuCau(tieude = tieude, noidung = noidung, id_taikhoan = id_tai_khoan)
+    db.session.add(yc)
+    db.session.commit()
+    return yc
+
+
 if __name__ == '__main__':
     with app.app_context():
-        print(get_ds_chi_tiet_hoa_don_tu_hoa_don(3))
+        add_yeu_cau(tieude = "hello", noidung = "test vội", id_tai_khoan = 3)
 

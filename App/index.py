@@ -3,11 +3,12 @@ import math
 import cloudinary
 import cloudinary.uploader
 from flask import Flask, render_template, request, redirect
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
-from App import app, login, dao, db
+from App import app, login, dao, db, admin
 from App.dao import tai_khoan_co_thue
 from App.decorators import anonymous_required
+from App.models import UserRole
 
 
 @login.user_loader
@@ -53,7 +54,10 @@ def dangnhap():
 
         if user:
             login_user(user)
+            if current_user.role == UserRole.ADMIN:
+                return redirect("/admin")
             next = request.args.get('next')
+
             return redirect(next if next else "/")
         else:
             err_msg = "Tài khoản hoặc mật khẩu không đúng!"
@@ -149,6 +153,14 @@ def chitiethoadon(id):
 
     return render_template("chitiethoadon.html", ds_chi_tiet_hoa_don=ds_chi_tiet_hoa_don, hoa_don=hoa_don)
 
+@app.route("/thanhtoan/<int:id>")
+def thanhtoan(id):
+    hoa_don = dao.get_hoa_don_by_id(id)
+    nguoi_thue = dao.tai_khoan_co_thue()
+    if nguoi_thue is None:
+        return redirect("/")
+    return render_template("thanhtoan.html",hoa_don = hoa_don)
+
 @app.route("/chitietbienlai/<int:id>")
 def chitietbienlai(id):
     hoa_don = dao.get_hoa_don_by_id(id)
@@ -159,7 +171,29 @@ def chitietbienlai(id):
 
     return render_template("chitietbienlai.html", ds_chi_tiet_hoa_don=ds_chi_tiet_hoa_don, hoa_don=hoa_don)
 
+@app.route("/yeucau",methods=['get','post'])
+def yeucau():
+    noti = None
+    nguoi_thue = dao.tai_khoan_co_thue()
+    if nguoi_thue is None:
+        return redirect("/")
+    if request.method.__eq__("POST"):
+        tieude = request.form.get("tieude")
+        noidung = request.form.get("noidung")
+        print(tieude)
+        print(noidung)
+        try:
+            dao.add_yeu_cau(tieude=tieude, noidung=noidung, id_tai_khoan=nguoi_thue.id_taikhoan)
+            noti = "Gửi Yêu cầu thành công"
+        except:
+            db.session.rollback()
+            noti = "Gửi Yêu cầu bị lỗi"
+        print(noti)
+    return render_template("yeucau.html",nguoi_thue=nguoi_thue, noti=noti)
 
+@app.route("/tintuc")
+def tintuc():
+    return render_template("tintuc.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

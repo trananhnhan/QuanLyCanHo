@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from enum import Enum as RoleEnum
 from symtable import Class
 import hashlib
@@ -47,7 +47,7 @@ class NguoiThue(Base):
     taikhoan = relationship('TaiKhoan', backref="NguoiThue", lazy=True)
 
     def __str__(self):
-        return str(self.ho + self.ten)
+        return str(self.ho +" " +self.ten)
 
 class LoaiPhi(Base):
     ten = Column(String(50), nullable=False)
@@ -62,6 +62,17 @@ class ChiTietPhi(Base):
 
     loaiphi = relationship('LoaiPhi', backref="ChiTietPhi", lazy=True)
     id_loaiphi = Column(Integer,ForeignKey(LoaiPhi.id), nullable=False)
+
+    @property
+    def canho(self):
+        if not self.DichVu:
+            return "Chưa sử dụng"
+        ds_phong = []
+        for dv in self.DichVu:
+            if dv.canho:
+                ds_phong.append(dv.canho.ten)
+        return ", ".join(ds_phong)
+
 
 class CanHo(Base):
     ten = Column(String(100), nullable=False)
@@ -81,15 +92,23 @@ class DichVu(Base):
     canho = relationship('CanHo', backref="DichVu", lazy=True)
     id_canho = Column(Integer, ForeignKey(CanHo.id), nullable=False)
 
+    @property
+    def loai_phi(self):
+        return self.chitietphi.loaiphi
+
 class HopDong(Base):
     ngaybatdau = Column(DateTime, default=datetime.now)
-    ngayketthuc = Column(DateTime, default=datetime.now)
+    thoihan = Column(Integer,default=1,nullable=False)
     tiencoc = Column(Integer, default=0)
 
     canho = relationship('CanHo',backref="HopDong",lazy=True)
     id_canho = Column(Integer, ForeignKey(CanHo.id), nullable=False)
     nguoithue = relationship('NguoiThue',backref="HopDong",lazy=True)
     id_nguoithue = Column(Integer, ForeignKey(NguoiThue.id), nullable=False)
+
+    @property
+    def ngayketthuc(self):
+        return self.ngaybatdau + timedelta(days=self.thoihan * 30)
 
 class HoaDon(Base):
     ngaythanhtoan = Column(DateTime)
@@ -100,7 +119,7 @@ class HoaDon(Base):
 
 class ChiTietHoaDon(Base):
     soluong = Column(Integer,default= 1, nullable=False)
-    dongia = Column(Integer, nullable=False)
+    dongia = Column(Integer, nullable=True)
 
     hoadon = relationship('HoaDon',backref="ChiTietHoaDon",lazy=True)
     id_hoadon = Column(Integer, ForeignKey(HoaDon.id), nullable=False)
@@ -110,7 +129,7 @@ class ChiTietHoaDon(Base):
 class YeuCau(Base):
     tieude = Column(String(50), nullable=False)
     noidung = Column(String(500))
-    ngaysua = Column(DateTime)
+    ngayxuly = Column(DateTime)
 
     taikhoan = relationship('TaiKhoan',backref="YeuCau",lazy=True)
     id_taikhoan = Column(Integer, ForeignKey(TaiKhoan.id), nullable=False)
@@ -126,7 +145,7 @@ def create_fake_data():
     print(">>> Bắt đầu tạo dữ liệu giả...")
 
     # 1. BẢNG TÀI KHOẢN (TaiKhoan)
-    print("--- 1. Tạo Tài khoản ---")
+
     pwhash = hashlib.md5("123".encode('utf-8')).hexdigest()
 
     admin_acc = TaiKhoan(username="admin", password=pwhash, role=UserRole.ADMIN)
@@ -139,7 +158,7 @@ def create_fake_data():
 
 
     # 2. BẢNG NGƯỜI THUÊ (NguoiThue)
-    print("--- 2. Tạo Người thuê ---")
+
     nt1 = NguoiThue(ho="Nguyễn Văn", ten="A", ngaysinh=datetime(1995, 5, 20), congviec="Lập trình viên",
                     sodienthoai="0909123456", id_taikhoan=user_acc1.id)
     nt2 = NguoiThue(ho="Trần Thị", ten="B", ngaysinh=datetime(1998, 8, 15), congviec="Kế toán",
@@ -152,7 +171,7 @@ def create_fake_data():
 
 
     # 3. BẢNG LOẠI PHÍ (LoaiPhi)
-    print("--- 3. Tạo Loại phí ---")
+
     lp_phong = LoaiPhi(ten="Tiền Phòng", mota="Phí thuê căn hộ hàng tháng")
     lp_dien = LoaiPhi(ten="Tiền Điện", mota="Tính theo số kWh")
     lp_nuoc = LoaiPhi(ten="Tiền Nước", mota="Tính theo khối hoặc đầu người")
@@ -163,7 +182,7 @@ def create_fake_data():
     db.session.commit()
 
     # 4. BẢNG CHI TIẾT PHÍ (ChiTietPhi - Bảng giá niêm yết)
-    print("--- 4. Tạo Chi tiết phí (Bảng giá) ---")
+
     # Giá phòng
     ctp_phong_vip = ChiTietPhi(sotienthu=5000000, donvi="Tháng", id_loaiphi=lp_phong.id, ghichu="Phòng VIP 1")
     ctp_phong_thuong = ChiTietPhi(sotienthu=3000000, donvi="Tháng", id_loaiphi=lp_phong.id, ghichu="Phòng thường")
@@ -178,7 +197,7 @@ def create_fake_data():
     db.session.commit()
 
     # 5. BẢNG CĂN HỘ (CanHo)
-    print("--- 5. Tạo Căn hộ ---")
+
     ch1 = CanHo(ten="P101", dientich=40, phongngu=1, tinhtrang=TinhTrang.DADAY, songuoitoida=2)
     ch2 = CanHo(ten="P102", dientich=25, phongngu=1, tinhtrang=TinhTrang.COTHETHUE, songuoitoida=1)
     ch3 = CanHo(ten="P201", dientich=50, phongngu=2, tinhtrang=TinhTrang.BAOTRI, songuoitoida=4)
@@ -194,7 +213,7 @@ def create_fake_data():
 
 
     # 6. BẢNG DỊCH VỤ (DichVu - Cấu hình phí cho từng phòng)
-    print("--- 6. Gán Dịch vụ cho Căn hộ ---")
+
     # P101: VIP + Điện + Nước
     db.session.add_all([
         DichVu(id_canho=ch1.id, id_chitietphi=ctp_phong_vip.id),
@@ -207,23 +226,23 @@ def create_fake_data():
     db.session.commit()
 
     # 7. BẢNG HỢP ĐỒNG (HopDong)
-    print("--- 7. Tạo Hợp đồng ---")
+
     # HD1: Nguyễn Văn A - P101 (Hết hạn/Hủy)
-    hd1 = HopDong(ngaybatdau=datetime(2024, 1, 1), ngayketthuc=datetime(2025, 1, 1), tiencoc=5000000, id_canho=ch1.id,
+    hd1 = HopDong(ngaybatdau=datetime(2024, 11, 1), thoihan = 7, tiencoc=5000000, id_canho=ch1.id,
                   id_nguoithue=nt1.id, active=False)
     # HD2: Trần Thị B - P101 (Hết hạn/Hủy)
-    hd2 = HopDong(ngaybatdau=datetime(2024, 1, 1), ngayketthuc=datetime(2025, 1, 1), tiencoc=5000000, id_canho=ch1.id,
+    hd2 = HopDong(ngaybatdau=datetime(2024, 10, 1), thoihan = 9, tiencoc=5000000, id_canho=ch1.id,
                   id_nguoithue=nt2.id, active=False)
 
     # --- CÁC HỢP ĐỒNG ĐANG HOẠT ĐỘNG (Dùng để test) ---
     # HD3: Nhân (User1) - P101
-    hd3 = HopDong(ngaybatdau=datetime(2024, 1, 1), ngayketthuc=datetime(2026, 1, 1), tiencoc=5000000, id_canho=ch1.id,
+    hd3 = HopDong(ngaybatdau=datetime(2025, 11, 1), thoihan = 5, tiencoc=5000000, id_canho=ch1.id,
                   id_nguoithue=nt3.id)
     # HD4: Nhân (User1) - P202 (Thuê thêm phòng nữa)
-    hd4 = HopDong(ngaybatdau=datetime(2024, 1, 1), ngayketthuc=datetime(2026, 1, 1), tiencoc=5000000, id_canho=ch4.id,
+    hd4 = HopDong(ngaybatdau=datetime(2025, 10, 1), thoihan = 3, tiencoc=5000000, id_canho=ch4.id,
                   id_nguoithue=nt3.id)
     # HD5: Nguyễn Văn A - P302
-    hd5 = HopDong(ngaybatdau=datetime(2024, 1, 1), ngayketthuc=datetime(2026, 1, 1), tiencoc=5000000, id_canho=ch7.id,
+    hd5 = HopDong(ngaybatdau=datetime(2025, 11, 1), thoihan = 2, tiencoc=5000000, id_canho=ch7.id,
                   id_nguoithue=nt1.id)
 
     db.session.add_all([hd1, hd2, hd3, hd4, hd5])
@@ -232,7 +251,7 @@ def create_fake_data():
 
     # 8. BẢNG HÓA ĐƠN & CHI TIẾT HÓA ĐƠN
 
-    print("--- 8. Tạo Hóa đơn & Chi tiết hóa đơn ---")
+
 
     # --- KỊCH BẢN 1: HÓA ĐƠN CHO HD5 (NGUYỄN VĂN A) ---
     # Giả sử có 3 tháng hóa đơn mẫu
@@ -321,7 +340,7 @@ def create_fake_data():
     yc1 = YeuCau(
         tieude="Hỏng bóng đèn",
         noidung="Bóng đèn nhà vệ sinh P101 bị cháy, nhờ admin thay giúp.",
-        ngaysua=None,
+        ngayxuly=None,
         id_taikhoan=user_acc1.id
     )
     db.session.add(yc1)
