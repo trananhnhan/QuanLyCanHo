@@ -92,6 +92,7 @@ def register():
 
             try:
                 dao.tao_tai_khoan(username=username, password=password, avatar=file_path)
+                print("hello123")
                 return redirect('/dangnhap')
             except:
                 db.session.rollback()

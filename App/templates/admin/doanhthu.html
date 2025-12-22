@@ -1,0 +1,23 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <table class="table table-bordered text-center" style="border: 1px solid #333;">
+                <thead>
+                    <tr style="background-color: #999; color: white;">
+                        <th style="vertical-align: middle; padding: 20px;">Tháng</th>
+                        <th style="vertical-align: middle; padding: 20px;">DoanhThu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% for dl in ds_du_lieu_giao_dien %}
+                        <tr style="background-color: #eee;"> <td style="padding: 20px;">{{ dl[0] }}</td> <td style="padding: 20px;">{{ "{:,.0f}".format(dl[1]) }}đ</td> </tr>
+                        {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{%endblock%}

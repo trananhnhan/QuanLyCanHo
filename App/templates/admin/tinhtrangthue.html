@@ -1,0 +1,46 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-5 col-12" style="font-weight:Bold;">
+        <p>Biểu đồ báo cáo tổng số tháng mà các phòng đã được hoặc sẽ được thuê dựa vào hợp đồng</p>
+    </div>
+    <div class="col-md-7 col-12">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        let data = [];
+        let labels = [];
+
+        {% for dl in ds_du_lieu_giao_dien %}
+            labels.push('{{dl[0]}}')
+            data.push({{dl[1]}})
+        {%endfor%}
+
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: '# tổng tháng thuê',
+              data: data,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+          }
+        });
+    </script>
+
+</div>
+
+{%endblock%}

@@ -5,6 +5,7 @@ from operator import is_none
 from flask_login import current_user
 from sqlalchemy import func
 from sqlalchemy.testing.pickleable import User
+from App import utils
 
 from App.models import (
     TaiKhoan, NguoiThue, LoaiPhi, ChiTietPhi, CanHo,
@@ -167,9 +168,20 @@ def add_yeu_cau(tieude = None, noidung = None,id_tai_khoan = None):
     db.session.add(yc)
     db.session.commit()
     return yc
-
-
+def tinh_doanh_thu():
+    query = (db.session.query(func.extract("year",HoaDon.ngaythanhtoan),func.extract("month",HoaDon.ngaythanhtoan),func.sum(HoaDon.tongtien))
+             .filter(HoaDon.ngaythanhtoan != None)
+             .group_by(func.extract("year",HoaDon.ngaythanhtoan),func.extract("month",HoaDon.ngaythanhtoan))
+             .order_by(func.extract("year",HoaDon.ngaythanhtoan).desc(),func.extract("month",HoaDon.ngaythanhtoan).desc())
+             .all()
+             )
+    return query
+def tinh_trang_thue_phong():
+    query = (db.session.query(HopDong.id_canho,func.sum(HopDong.thoihan))
+             .group_by(HopDong.id_canho).all()
+             )
+    return query
 if __name__ == '__main__':
     with app.app_context():
-        add_yeu_cau(tieude = "hello", noidung = "test vội", id_tai_khoan = 3)
+        print(tinh_trang_thue_phong())
 

@@ -10,6 +10,7 @@ from flask_login import UserMixin
 
 
 
+
 class UserRole(RoleEnum):
     USER = 0
     ADMIN = 1
@@ -30,7 +31,7 @@ class Base(db.Model):
 class TaiKhoan(Base, UserMixin):
     username = Column(String(150), nullable=False, unique=True)
     password = Column(String(150), nullable=False)
-    avatar = Column(String(150),default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
+    avatar = Column(String(150),default="https://res.cloudinary.com/dddesdoxw/image/upload/v1766415693/user_h3el87.jpg")
     role = Column(Enum(UserRole), default= UserRole.USER, nullable= false)
 
     def __str__(self):
